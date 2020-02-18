@@ -8,7 +8,7 @@ import { Todo } from './todo';
 })
 export class TodoCardComponent implements OnInit {
 
-  @Input() todo: todo;
+  @Input() todo: Todo;
   @Input() simple?: boolean = false;
 
   constructor() { }
