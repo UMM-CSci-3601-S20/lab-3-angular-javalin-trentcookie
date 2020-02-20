@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserRole } from './user';
+import { Todo } from './todo';
 import { TodoService } from './todo.service';
 
 @Component({
-  selector: 'app-user-list-component',
-  templateUrl: 'user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-todo-list-component',
+  templateUrl: 'todo-list.component.html',
+  styleUrls: ['./todo-list.component.scss'],
   providers: []
 })
 
 export class TodoListComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
-  public serverFilteredUsers: User[];
-  public filteredUsers: User[];
+  public serverFilteredTodos: Todo[];
+  public filteredTodos: Todo[];
 
-  public userName: string;
-  public userAge: number;
-  public userRole: UserRole;
-  public userCompany: string;
-  public viewType: 'card' | 'list' = 'card';
+  public todoOwner: string;
+  public todoId: string;
+  public todoStatus: boolean;
+  public todoBody: string;
+  public todoCategory: string;
 
 
   // Inject the UserService into this component.
@@ -27,16 +27,19 @@ export class TodoListComponent implements OnInit {
   // We can call upon the service for interacting
   // with the server.o
 
-  constructor(private userService: UserService) {
+  constructor(private todoService: TodoService) {
 
   }
 
-  getUsersFromServer() {
-    this.userService.getUsers({
-      role: this.userRole,
-      age: this.userAge
-    }).subscribe(returnedUsers => {
-      this.serverFilteredUsers = returnedUsers;
+  getTodosFromServer() {
+    this.todoService.getTodos({
+      owner: this.todoOwner,
+      _id: this.todoId,
+      category: this.todoCategory,
+      body: this.todoBody,
+      status: this.todoStatus
+    }).subscribe(returnedTodos => {
+      this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
     }, err => {
       console.log(err);
@@ -44,8 +47,8 @@ export class TodoListComponent implements OnInit {
   }
 
   public updateFilter() {
-    this.filteredUsers = this.userService.filterUsers(
-      this.serverFilteredUsers, { name: this.userName, company: this.userCompany });
+    this.filteredTodos = this.todoService.filterTodos(
+      this.serverFilteredTodos, { owner: this.todoOwner, category: this.todoCategory });
   }
 
   /**
@@ -53,6 +56,6 @@ export class TodoListComponent implements OnInit {
    *
    */
   ngOnInit(): void {
-    this.getUsersFromServer();
+    this.getTodosFromServer();
   }
 }
