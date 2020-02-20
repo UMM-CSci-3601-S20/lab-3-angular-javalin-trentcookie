@@ -3,13 +3,13 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRouteStub } from '../../testing/activated-route-stub';
-import { MockUserService } from '../../testing/user.service.mock';
+import { MockTodoService } from '../../testing/todo.service.mock';
 import { Todo } from './todo';
 import { TodoCardComponent } from './todo-card.component';
 import { TodoProfileComponent } from './todo-profile.component';
 import { TodoService } from './todo.service';
-/*
-describe('UserProfileComponent', () => {
+
+describe('TodoProfileComponent', () => {
   let component: TodoProfileComponent;
   let fixture: ComponentFixture<TodoProfileComponent>;
   const activatedRoute: ActivatedRouteStub = new ActivatedRouteStub();
@@ -22,7 +22,7 @@ describe('UserProfileComponent', () => {
       ],
       declarations: [TodoProfileComponent, TodoCardComponent],
       providers: [
-        { provide: TodoService, useValue: new MockUserService() },
+        { provide: TodoService, useValue: new MockTodoService() },
         { provide: ActivatedRoute, useValue: activatedRoute }
       ]
     })
@@ -40,30 +40,30 @@ describe('UserProfileComponent', () => {
   });
 
   it('should navigate to the info of a specific todos', () => {
-    const expectedTodo: Todo = MockUserService.testTodos[0];
+    const expectedTodo: Todo = MockTodoService.testTodos[0];
     // Setting this should cause anyone subscribing to the paramMap
     // to update. Our `TodoProfileComponent` subscribes to that, so
     // it should update right away.
-    activatedRoute.setParamMap({ id: expectedTodo._id });
+    activatedRoute.setParamMap({ owner: expectedTodo.owner });
 
-    expect(component.id).toEqual(expectedTodo._id);
+    expect(component.owner).toEqual(expectedTodo.owner);
     expect(component.todo).toEqual(expectedTodo);
   });
 
   it('should navigate to correct todo when owner changes', () => {
-    let expectedTodo: Todo = MockUserService.testTodos[0];
+    let expectedTodo: Todo = MockTodoService.testTodos[0];
     // Setting this should cause anyone subscribing to the paramMap
     // to update. Our `TodoProfileComponent` subscribes to that, so
     // it should update right away.
-    activatedRoute.setParamMap({ id: expectedTodo._id });
+    activatedRoute.setParamMap({ owner: expectedTodo.owner });
 
-    expect(component.id).toEqual(expectedTodo._id);
+    expect(component.owner).toEqual(expectedTodo.owner)
 
     // Changing the paramMap should update the displayed user profile.
-    expectedTodo = MockUserService.testTodos[1];
-    activatedRoute.setParamMap({ id: expectedTodo._id });
+    expectedTodo = MockTodoService.testTodos[1];
+    activatedRoute.setParamMap({ id: expectedTodo.owner});
 
-    expect(component.id).toEqual(expectedTodo._id);
+    expect(component.owner).toEqual(expectedTodo.owner);
   });
 
   it('should have `null` for the todo for an invalid owner search', () => {
@@ -76,4 +76,4 @@ describe('UserProfileComponent', () => {
     expect(component.todo).toBeNull();
   });
 });
-*/
+

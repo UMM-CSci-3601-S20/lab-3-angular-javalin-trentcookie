@@ -21,7 +21,7 @@ export class TodoProfileComponent implements OnInit {
     // to display the newly requested user.
     this.route.paramMap.subscribe((pmap) => {
       this.owner = pmap.get('owner');
-      this.todoService.getUserById(this.owner).subscribe(todo => this.todo = todo);
+      this.todoService.getTodoByOwner(this.owner).subscribe(todo => this.todo = todo);
     });
   }
 
