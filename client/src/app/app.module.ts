@@ -31,7 +31,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { TodoService } from './todos/todo.service';
-import { TodoProfileComponent } from './todos/todo-profile.component';
+import { TodoProfileComponent } from './todos/todo-profile.component2';
 import { TodoListComponent } from './todos/todo-list.component2';
 
 import { from } from 'rxjs';
@@ -63,7 +63,6 @@ const MATERIAL_MODULES: any[] = [
     UserProfileComponent,
     TodoProfileComponent,
     TodoListComponent,
-    TodoCardComponent,
   ],
   imports: [
     BrowserModule,
