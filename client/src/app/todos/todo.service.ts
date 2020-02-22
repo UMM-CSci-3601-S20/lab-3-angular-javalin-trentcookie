@@ -2,8 +2,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todo } from './todo';
-import { filter } from 'minimatch';
+
+
+@Injectable()import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+
 
 @Injectable()
 export class TodoService {
@@ -12,68 +17,59 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getTodos(filters?: { owner?: string}){
-    let httpParams: HttpParams = new HttpParams();
-    if(filters){
-      if(filters.owner){
-        httpParams = httpParams.set('owner', filters.owner);
-      }
-    }
-  return this.httpClient.get<Todo>(this.todoUrl)
-  }
+  //make category TodoCategory and have the options be video games, homework, software desing, and groceries
 
-  getTodoByOwner(owner: string): Observable<Todo> {
-    return this.httpClient.get<Todo>(this.todoUrl + '/' + owner);
-  }
-
-  /*
-  getTodos(filters?: { owner?: string, category?: string, }): Observable<Todo[]> {
+  getTodos(filters?: { category?: string, status?: boolean, body?: string, owner?: string, _id?: string}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.role) {
-        httpParams = httpParams.set('role', filters.role);
+      if (filters.owner) {
+        httpParams = httpParams.set('owner', filters.owner);
       }
-      if (filters.age) {
-        httpParams = httpParams.set('age', filters.age.toString());
+      if (filters.category) {
+        httpParams = httpParams.set('category', filters.category);
       }
-      if (filters.company) {
-        httpParams = httpParams.set('company', filters.company);
+      if (filters.body) {
+        httpParams = httpParams.set('body', filters.body);
+      }
+      if (filters.status) {
+        httpParams = httpParams.set('status', filters.status);
+      }
+      if (filters._id) {
+        httpParams = httpParams.set('id', filters._id);
       }
     }
-    return this.httpClient.get<User[]>(this.userUrl, {
+    return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,
     });
   }
 
-  getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.userUrl + '/' + id);
+  getTodoById(id: string): Observable<Todo> {
+    return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
-  */
 
-/*
-  filterUsers(users: User[], filters: { name?: string, company?: string }): User[] {
+  filterTodos(todos: Todo[], filters: { category?: string, status?: boolean, body?: string, owner?: string, _id?: string}): Todo[] {
 
-    let filteredUsers = users;
+    let filteredTodos = todos;
 
-    // Filter by name
-    if (filters.name) {
-      filters.name = filters.name.toLowerCase();
+    // Filter by owner
+    if (filters.owner) {
+      filters.owner = filters.owner.toLowerCase();
 
-      filteredUsers = filteredUsers.filter(user => {
-        return user.name.toLowerCase().indexOf(filters.name) !== -1;
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.name.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
 
-    // Filter by company
-    if (filters.company) {
-      filters.company = filters.company.toLowerCase();
+    // Filter by category
+    if (filters.category) {
+      filters.category = filters.category.toLowerCase();
 
-      filteredUsers = filteredUsers.filter(user => {
-        return user.company.toLowerCase().indexOf(filters.company) !== -1;
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
       });
     }
 
-    return filteredUsers;
+    return filteredTodos;
   }
-  */
 }
+
