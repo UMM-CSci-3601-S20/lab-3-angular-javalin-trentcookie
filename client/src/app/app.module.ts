@@ -32,8 +32,8 @@ import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { TodoService } from './todos/todo.service';
 import { TodoProfileComponent } from './todos/todo-profile.component';
-import { TodoListComponent } from './todos/todo-list.component';
-import { TodoCardComponent } from './todos/todo-card.component';
+import { TodoListComponent } from './todos/todo-list.component2';
+
 import { from } from 'rxjs';
 
 const MATERIAL_MODULES: any[] = [

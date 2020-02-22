@@ -2,12 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Todo, TodoCategory } from './todo2';
 
-
-@Injectable()import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 
 @Injectable()
@@ -17,9 +13,7 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  //make category TodoCategory and have the options be video games, homework, software desing, and groceries
-
-  getTodos(filters?: { category?: string, status?: boolean, body?: string, owner?: string, _id?: string}): Observable<Todo[]> {
+  getTodos(filters?: { category?: TodoCategory, status?: boolean, body?: string, owner?: string, _id?: string}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.owner) {
@@ -56,7 +50,7 @@ export class TodoService {
       filters.owner = filters.owner.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => {
-        return todo.name.toLowerCase().indexOf(filters.owner) !== -1;
+        return todo.owner.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
 
