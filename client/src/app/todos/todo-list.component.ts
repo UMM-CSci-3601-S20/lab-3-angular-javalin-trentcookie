@@ -15,10 +15,11 @@ export class TodoListComponent implements OnInit {
   public filteredTodos: Todo[];
 
   public todoOwner: string;
-  public todoId: string;
+
   public todoStatus: boolean;
-  public todoBody: string;
+
   public todoCategory: string;
+  public viewType: 'card' | 'list' = 'card';
 
 
   // Inject the UserService into this component.
@@ -34,9 +35,7 @@ export class TodoListComponent implements OnInit {
   getTodosFromServer() {
     this.todoService.getTodos({
       owner: this.todoOwner,
-      _id: this.todoId,
       category: this.todoCategory,
-      body: this.todoBody,
       status: this.todoStatus
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
