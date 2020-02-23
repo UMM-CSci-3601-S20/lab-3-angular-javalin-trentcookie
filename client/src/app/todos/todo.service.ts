@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Todo } from './todo';
-import { filter } from 'minimatch';
+
 
 @Injectable()
 export class TodoService {
@@ -12,68 +12,52 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getTodos(filters?: { owner?: string}){
+  getTodos(filters?: { owner?: string, status?: boolean, category?: string}): Observable<Todo[]>{
     let httpParams: HttpParams = new HttpParams();
     if(filters){
       if(filters.owner){
         httpParams = httpParams.set('owner', filters.owner);
       }
+      if(filters.category){
+        httpParams = httpParams.set('category',filters.category);
+      }
+      if(filters.status){
+        httpParams = httpParams.set('status',filters.status.toString());
+      }
     }
-  return this.httpClient.get<Todo>(this.todoUrl)
+    return this.httpClient.get<Todo[]>(this.todoUrl, {
+      params:httpParams,
+    });
   }
 
   getTodoByOwner(owner: string): Observable<Todo> {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + owner);
   }
 
-  /*
-  getTodos(filters?: { owner?: string, category?: string, }): Observable<Todo[]> {
-    let httpParams: HttpParams = new HttpParams();
-    if (filters) {
-      if (filters.role) {
-        httpParams = httpParams.set('role', filters.role);
-      }
-      if (filters.age) {
-        httpParams = httpParams.set('age', filters.age.toString());
-      }
-      if (filters.company) {
-        httpParams = httpParams.set('company', filters.company);
-      }
-    }
-    return this.httpClient.get<User[]>(this.userUrl, {
-      params: httpParams,
-    });
-  }
 
-  getUserById(id: string): Observable<User> {
-    return this.httpClient.get<User>(this.userUrl + '/' + id);
-  }
-  */
+//need to add status to filteredTodos
+  filterTodos(todos: Todo[], filters: { owner?: string, category?: string }): Todo[] {
 
-/*
-  filterUsers(users: User[], filters: { name?: string, company?: string }): User[] {
+    let filteredTodos = todos;
 
-    let filteredUsers = users;
+    // Filter by owner
+    if (filters.owner) {
+      filters.owner = filters.owner.toLowerCase();
 
-    // Filter by name
-    if (filters.name) {
-      filters.name = filters.name.toLowerCase();
-
-      filteredUsers = filteredUsers.filter(user => {
-        return user.name.toLowerCase().indexOf(filters.name) !== -1;
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.owner.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
 
-    // Filter by company
-    if (filters.company) {
-      filters.company = filters.company.toLowerCase();
+    // Filter by category
+    if (filters.category) {
+      filters.category = filters.category.toLowerCase();
 
-      filteredUsers = filteredUsers.filter(user => {
-        return user.company.toLowerCase().indexOf(filters.company) !== -1;
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
       });
     }
-
-    return filteredUsers;
+    return filteredTodos;
   }
-  */
+
 }
