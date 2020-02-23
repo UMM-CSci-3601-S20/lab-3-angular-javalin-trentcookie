@@ -15,8 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockTodoService } from '../../testing/todo.service.mock';
-import { Todo } from './todo2';
-import { TodoListComponent } from './todo-list.component2';
+import { Todo } from './todo';
+import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
 
 const COMMON_IMPORTS: any[] = [

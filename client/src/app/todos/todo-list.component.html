@@ -61,6 +61,7 @@
   </div>
 </div>
 
+
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else todosError" >
     <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
@@ -90,6 +91,21 @@
 
     </div>
   </div>
+
+
+  <mat-card-content>
+    <mat-nav-list class="todo-nav-list">
+      <h3 mat-subheader>Todos</h3>
+      <a mat-list-item *ngFor="let user of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="todo-list-item">
+
+        <h3 matLine class="todo-list-owner"> {{todo.owner}} </h3>
+        <p matLine class="todo-list-category"> {{todo.category}} </p>
+        <p matLine class="todo-list-status"> {{todo.status}} </p>
+        <p matLine class="todo-list-id"> {{todo._id}} </p>
+        <p matLine class="todo-list-body"> {{todo.body}} </p>
+      </a>
+    </mat-nav-list>
+  </mat-card-content>
 
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #todosError>

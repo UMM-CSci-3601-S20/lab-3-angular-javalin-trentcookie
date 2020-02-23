@@ -31,8 +31,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { TodoService } from './todos/todo.service';
-import { TodoProfileComponent } from './todos/todo-profile.component2';
-import { TodoListComponent } from './todos/todo-list.component2';
+import { TodoProfileComponent } from './todos/todo-profile.component';
+import { TodoListComponent } from './todos/todo-list.component';
 
 import { from } from 'rxjs';
 

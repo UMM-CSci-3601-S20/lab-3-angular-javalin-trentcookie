@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Todo } from './todo2';
+import { Todo } from './todo';
 import { TodoService } from './todo.service';
 
 @Component({
   selector: 'app-todo-profile',
-  templateUrl: './todo-profile.component2.html',
-  styleUrls: ['./todo-profile.component2.scss']
+  templateUrl: './todo-profile.component.html',
+  styleUrls: ['./todo-profile.component.scss']
 })
 export class TodoProfileComponent implements OnInit {
 

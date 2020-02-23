@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todo, TodoCategory } from './todo2';
+import { Todo, TodoCategory } from './todo';
 
 
 
@@ -26,7 +26,7 @@ export class TodoService {
         httpParams = httpParams.set('body', filters.body);
       }
       if (filters.status) {
-        httpParams = httpParams.set('status', filters.status);
+        httpParams = httpParams.set('status', filters.status.toString());
       }
       if (filters._id) {
         httpParams = httpParams.set('id', filters._id);
