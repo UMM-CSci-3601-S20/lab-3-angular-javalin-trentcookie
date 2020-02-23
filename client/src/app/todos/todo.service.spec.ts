@@ -74,50 +74,30 @@ describe('Todo: ', () => {
     req.flush(testTodos);
   });
 
-  /*
-  it('getUsers() calls api/users with filter parameter \'admin\'', () => {
 
-    userService.getUsers({ role: 'admin' }).subscribe(
-      users => expect(users).toBe(testUsers)
+  it('getTodos() calls api/todos with filter parameter \'status\'', () => {
+
+    todoService.getTodos({ status: false }).subscribe(
+      todos => expect(todos).toBe(testTodos)
     );
 
-    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+    // Specify that (exactly) one request will be made to the specified URL with the status parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(userService.userUrl) && request.params.has('role')
+      (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('status')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
-    // Check that the role parameter was 'admin'
-    expect(req.request.params.get('role')).toEqual('admin');
+    // Check that the role parameter was 'false'
+    expect(req.request.params.get('status')).toEqual('false');
 
-    req.flush(testUsers);
+    req.flush(testTodos);
   });
-
-  it('getUsers() calls api/users with filter parameter \'age\'', () => {
-
-    userService.getUsers({ age: 25 }).subscribe(
-      users => expect(users).toBe(testUsers)
-    );
-
-    // Specify that (exactly) one request will be made to the specified URL with the role parameter.
-    const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(userService.userUrl) && request.params.has('age')
-    );
-
-    // Check that the request made to that URL was a GET request.
-    expect(req.request.method).toEqual('GET');
-
-    // Check that the role parameter was 'admin'
-    expect(req.request.params.get('age')).toEqual('25');
-
-    req.flush(testUsers);
-  });
-
+/*
   it('getUsers() calls api/users with multiple filter parameters', () => {
 
-    userService.getUsers({ role: 'editor', company: 'IBM', age: 37 }).subscribe(
+    todoService.getTodos({ role: 'editor', company: 'IBM', age: 37 }).subscribe(
       users => expect(users).toBe(testUsers)
     );
 

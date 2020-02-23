@@ -15,7 +15,7 @@ export class TodoListComponent implements OnInit {
   public filteredTodos: Todo[];
 
   public todoOwner: string;
-
+  public todoBody: string;
   public todoStatus: boolean;
 
   public todoCategory: string;

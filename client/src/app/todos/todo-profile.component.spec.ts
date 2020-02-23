@@ -61,13 +61,13 @@ describe('TodoProfileComponent', () => {
 
     // Changing the paramMap should update the displayed user profile.
     expectedTodo = MockTodoService.testTodos[1];
-    activatedRoute.setParamMap({ id: expectedTodo.owner});
+    activatedRoute.setParamMap({ owner: expectedTodo.owner});
 
     expect(component.owner).toEqual(expectedTodo.owner);
   });
 
   it('should have `null` for the todo for an invalid owner search', () => {
-    activatedRoute.setParamMap({ id: 'badOwner' });
+    activatedRoute.setParamMap({ owner: 'badOwner' });
 
     // If the given owner doesn't map to a todo, we expect the service
     // to return `null`, so we would expect the component's todo

@@ -12,13 +12,16 @@
       <mat-icon matListIcon>home</mat-icon>
       Home
       </mat-list-item>
-
       <mat-list-item routerLink="/users" routerLinkActive="drawer-list-item-active"
       (click)="drawer.close()">
         <mat-icon matListIcon>people</mat-icon>
         Users
       </mat-list-item>
-
+      <mat-list-item routerLink="/todos" routerLinkActive="drawer-list-item-active"
+      (click)="drawer.close()">
+        <mat-icon matListIcon>assignment_turned_in</mat-icon>
+        Todos
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
 
