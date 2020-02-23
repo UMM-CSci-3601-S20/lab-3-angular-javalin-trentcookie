@@ -6,4 +6,4 @@ export interface Todo {
   category: string;
 }
 
-export type TodoRole = "admin" | "editor" | "viewer";
+

@@ -170,4 +170,15 @@ describe('Todo: ', () => {
     expect(userService.filterUsers(testUsers, { name: userName, company: userCompany }).length).toBe(1);
   });
   */
+
+  it('filterTodos() by owner', () => {
+    expect(testTodos.length).toBe(3);
+    const todoOwner = 'Fry';
+    expect(todoService.filterTodos(testTodos, {owner: todoOwner}).length).toBe(2);
+  })
+
+  it('filterTodos() by category', () => {
+    expect(testTodos.length).toBe(3);
+    const todoBody = ''
+  })
 });
