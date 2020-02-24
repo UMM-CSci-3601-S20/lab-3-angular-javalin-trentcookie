@@ -90,7 +90,7 @@ describe('Todo: ', () => {
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'false'
-    expect(req.request.params.get('status')).toEqual('false');
+    expect(req.request.params.get('status')).toEqual('incomplete');
 
     req.flush(testTodos);
   });
@@ -113,7 +113,7 @@ describe('Todo: ', () => {
     // Check that the role parameters are correct
     expect(req.request.params.get('owner')).toEqual('Blanche');
     expect(req.request.params.get('category')).toEqual('software design');
-    expect(req.request.params.get('status')).toEqual('false');
+    expect(req.request.params.get('status')).toEqual('incomplete');
 
     req.flush(testTodos);
   });
