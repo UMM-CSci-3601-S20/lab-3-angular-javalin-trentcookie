@@ -159,6 +159,13 @@ describe('Todo: ', () => {
 
   it('filterTodos() by category', () => {
     expect(testTodos.length).toBe(3);
-    const todoBody = ''
+    const todoCategory = 'software design';
+    expect(todoService.filterTodos(testTodos, {category: todoCategory}).length).toBe(1);
+  })
+
+  it('filterTodos() by body', () => {
+    expect(testTodos.length).toBe(3);
+    const todoBody = 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.';
+    expect(todoService.filterTodos(testTodos, { body: todoBody}).length).toBe(1);
   })
 });
