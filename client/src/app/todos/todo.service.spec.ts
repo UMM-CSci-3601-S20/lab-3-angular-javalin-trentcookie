@@ -77,7 +77,7 @@ describe('Todo: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'status\'', () => {
 
-    todoService.getTodos({ status: false }).subscribe(
+    todoService.getTodos({ status: 'false' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -94,62 +94,62 @@ describe('Todo: ', () => {
 
     req.flush(testTodos);
   });
-/*
-  it('getUsers() calls api/users with multiple filter parameters', () => {
 
-    todoService.getTodos({ role: 'editor', company: 'IBM', age: 37 }).subscribe(
-      users => expect(users).toBe(testUsers)
+  it('getTodos() calls api/todos with multiple filter parameters', () => {
+
+    todoService.getTodos({ owner: 'Blanche', category: 'software design', status: 'false' }).subscribe(
+      todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(userService.userUrl)
-        && request.params.has('role') && request.params.has('company') && request.params.has('age')
+      (request) => request.url.startsWith(todoService.todoUrl)
+        && request.params.has('owner') && request.params.has('category') && request.params.has('status')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameters are correct
-    expect(req.request.params.get('role')).toEqual('editor');
-    expect(req.request.params.get('company')).toEqual('IBM');
-    expect(req.request.params.get('age')).toEqual('37');
+    expect(req.request.params.get('owner')).toEqual('Blanche');
+    expect(req.request.params.get('category')).toEqual('software design');
+    expect(req.request.params.get('status')).toEqual('false');
 
-    req.flush(testUsers);
+    req.flush(testTodos);
   });
 
-  it('getUserById() calls api/users/id', () => {
-    const targetUser: User = testUsers[1];
-    const targetId: string = targetUser._id;
-    userService.getUserById(targetId).subscribe(
-      user => expect(user).toBe(targetUser)
+  it('getTodoById() calls api/todos/id', () => {
+    const targetTodo: Todo = testTodos[1];
+    const targetId: string = targetTodo._id;
+    todoService.getTodoById(targetId).subscribe(
+      todo => expect(todo).toBe(targetTodo)
     );
 
-    const expectedUrl: string = userService.userUrl + '/' + targetId;
+    const expectedUrl: string = todoService.todoUrl + '/' + targetId;
     const req = httpTestingController.expectOne(expectedUrl);
     expect(req.request.method).toEqual('GET');
-    req.flush(targetUser);
+    req.flush(targetTodo);
   });
 
-  it('filterUsers() filters by name', () => {
-    expect(testUsers.length).toBe(3);
-    const userName = 'a';
-    expect(userService.filterUsers(testUsers, { name: userName }).length).toBe(2);
+  it('filterTodos() filters by owner', () => {
+    expect(testTodos.length).toBe(3);
+    const todoOwner = 'Fry';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner }).length).toBe(2);
   });
 
-  it('filterUsers() filters by company', () => {
-    expect(testUsers.length).toBe(3);
-    const userCompany = 'UMM';
-    expect(userService.filterUsers(testUsers, { company: userCompany }).length).toBe(1);
+  it('filterUsers() filters by category', () => {
+    expect(testTodos.length).toBe(3);
+    const todoCategory = 'video games';
+    expect(todoService.filterTodos(testTodos, { category: todoCategory }).length).toBe(1);
   });
 
-  it('filterUsers() filters by name and company', () => {
-    expect(testUsers.length).toBe(3);
-    const userCompany = 'UMM';
-    const userName = 'chris';
-    expect(userService.filterUsers(testUsers, { name: userName, company: userCompany }).length).toBe(1);
+  it('filterTodos() filters by owner and category', () => {
+    expect(testTodos.length).toBe(3);
+    const todoCategory = 'video games';
+    const todoOwner = 'Fry';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner, category: todoCategory }).length).toBe(1);
   });
-  */
+
 
   it('filterTodos() by owner', () => {
     expect(testTodos.length).toBe(3);
@@ -159,6 +159,13 @@ describe('Todo: ', () => {
 
   it('filterTodos() by category', () => {
     expect(testTodos.length).toBe(3);
-    const todoBody = ''
+    const todoCategory = 'software design';
+    expect(todoService.filterTodos(testTodos, {category: todoCategory}).length).toBe(1);
+  })
+
+  it('filterTodos() by body', () => {
+    expect(testTodos.length).toBe(3);
+    const todoBody = 'Ullamco irure laborum magna dolor non. Anim occaecat adipisicing cillum eu magna in.';
+    expect(todoService.filterTodos(testTodos, { body: todoBody}).length).toBe(1);
   })
 });
