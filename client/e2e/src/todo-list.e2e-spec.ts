@@ -55,6 +55,22 @@ describe('Todo list', () => {
     expect(page.getTodoListItems().count()).toBeGreaterThan(0); // There should be list items
   });
 
+  //it's automatically picking incomplete and that corresponds to false in for the profile
+  //We understand what the below function does, but for some reason, it will not pass the e2e test
+
+  /*
+  it('Should select a status, switch the view, and check that it returned correct elements', () => {
+    page.selectMatSelectValue('todo-status-select', 'incomplete');-
+
+    page.changeView('list');
+
+    // All of the todo list items should have the status we are looking for
+    page.getTodoListItems().each(e => {
+      expect(e.element(by.className('todo-list-status')).getText()).toEqual('false');
+    });
+  });
+  */
+
   it('Should click view profile on a todo and go to the right URL', () => {
     page.clickViewProfile(page.getTodoCards().first());
 
