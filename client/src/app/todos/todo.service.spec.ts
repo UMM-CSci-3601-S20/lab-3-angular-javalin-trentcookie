@@ -77,7 +77,7 @@ describe('Todo: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'status\'', () => {
 
-    todoService.getTodos({ status: 'false' }).subscribe(
+    todoService.getTodos({ status: 'incomplete' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -97,7 +97,7 @@ describe('Todo: ', () => {
 
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
-    todoService.getTodos({ owner: 'Blanche', category: 'software design', status: 'false' }).subscribe(
+    todoService.getTodos({ owner: 'Blanche', category: 'software design', status: 'incomplete' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
