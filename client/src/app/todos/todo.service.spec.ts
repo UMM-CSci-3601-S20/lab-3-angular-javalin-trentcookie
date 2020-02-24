@@ -77,7 +77,7 @@ describe('Todo: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'status\'', () => {
 
-    todoService.getTodos({ status: 'false' }).subscribe(
+    todoService.getTodos({ status: 'incomplete' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -90,14 +90,14 @@ describe('Todo: ', () => {
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'false'
-    expect(req.request.params.get('status')).toEqual('false');
+    expect(req.request.params.get('status')).toEqual('incomplete');
 
     req.flush(testTodos);
   });
 
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
-    todoService.getTodos({ owner: 'Blanche', category: 'software design', status: 'false' }).subscribe(
+    todoService.getTodos({ owner: 'Blanche', category: 'software design', status: 'incomplete' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -113,7 +113,7 @@ describe('Todo: ', () => {
     // Check that the role parameters are correct
     expect(req.request.params.get('owner')).toEqual('Blanche');
     expect(req.request.params.get('category')).toEqual('software design');
-    expect(req.request.params.get('status')).toEqual('false');
+    expect(req.request.params.get('status')).toEqual('incomplete');
 
     req.flush(testTodos);
   });

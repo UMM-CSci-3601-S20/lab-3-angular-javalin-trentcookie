@@ -55,17 +55,6 @@ describe('Todo list', () => {
     expect(page.getTodoListItems().count()).toBeGreaterThan(0); // There should be list items
   });
 
-  it('Should select a category, switch the view, and check that it returned correct elements', () => {
-    page.selectMatSelectValue('todo-category-select', 'groceries');
-
-    page.changeView('list');
-
-    // All of the todo list items should have the category we are looking for
-    page.getTodoListItems().each(e => {
-      expect(e.element(by.className('todo-list-category')).getText()).toEqual('groceries');
-    });
-  });
-
   it('Should click view profile on a todo and go to the right URL', () => {
     page.clickViewProfile(page.getTodoCards().first());
 
